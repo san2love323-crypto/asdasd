@@ -15021,7 +15021,6 @@ const bootWait = setInterval(function(){
     if(typeof S!=='undefined' && S){
       clearInterval(bootWait);
       ensureExt(); codexScan(); checkExtAch();
-      log('<span class="p">🌌 모험+ 확장팩 로드 완료! (탭에서 확인하세요)</span>');
     }
   }catch(e){}
 }, 500);
@@ -15819,7 +15818,6 @@ const boot2=setInterval(function(){
       clearInterval(boot2);
       ensureX2(); injectUI(); rebuildDevJobUI();
       if(typeof renderJobUI==='function') renderJobUI();
-      log('<span class="p">🌠 확장팩 2탄 로드! 신규 직업 12종 + 신규 콘텐츠 10종 추가!</span>');
     }
   }catch(e){}
 }, 600);
@@ -16314,7 +16312,6 @@ const boot3=setInterval(function(){
     if(typeof S!=='undefined'&&S){
       clearInterval(boot3);
       x3(); injectUI3();
-      log('<span class="p">🎪 확장팩 3탄 로드! 카드·농장·미궁·세트·유령·보드게임·특전·도전타워·가게운영·변신 추가!</span>');
     }
   }catch(e){}
 }, 700);
@@ -16834,7 +16831,6 @@ const boot4=setInterval(function(){
       const e=x4(); injectX4();
       // 저장된 테마 적용
       if(e&&THEME_COLORS[e.theme]) document.documentElement.style.setProperty('--rift', THEME_COLORS[e.theme][0]);
-      log('<span class="p">🧰 확장팩 4탄 로드! 각 탭에 편의 기능 15종 추가!</span>');
     }
   }catch(e){}
 }, 800);
@@ -16960,7 +16956,6 @@ const boot5=setInterval(function(){
     if(typeof S!=='undefined'&&S){
       clearInterval(boot5);
       x5(); injectX5();
-      log('<span class="p">♻️ 확장팩 5탄 로드! 환생 대개편(가속·혜택·완전초기화) + 보스 오토 추가!</span>');
     }
   }catch(e){}
 }, 900);
@@ -17131,7 +17126,6 @@ const boot6=setInterval(function(){
         renderRankUI();
         try{ if(typeof updateDevConsoleButton==='function') updateDevConsoleButton(); }catch(e){}
       });
-      log('<span class="p">🛡️ 확장팩 6탄 로드! 문의하기·보안·운영 등급 시스템 활성화</span>');
     }
   }catch(e){}
 }, 1000);
@@ -17394,7 +17388,6 @@ const boot7=setInterval(function(){
   try{
     if(typeof S!=='undefined'&&S){
       clearInterval(boot7);
-      log('<span class="p">🐲 확장팩 7탄 로드! 매시 정각 실시간 레이드 + 모바일 연타 지원!</span>');
     }
   }catch(e){}
 }, 1100);
@@ -17458,7 +17451,6 @@ const boot8=setInterval(function(){
   try{
     if(typeof S!=='undefined'&&S){
       clearInterval(boot8);
-      log('<span class="p">⚖️ 확장팩 8탄 로드! 신규 차원 12개(스테이지 2000까지) + 밸런스 개편 + 오프라인 모드!</span>');
     }
   }catch(e){}
 }, 1200);
@@ -17522,7 +17514,6 @@ const boot9=setInterval(function(){
     if(typeof S!=='undefined'&&S){
       clearInterval(boot9);
       x7();
-      log('<span class="p">🎁 확장팩 9탄 로드! 쿠폰 코드 + 🐢 무료 느린 자동전투 추가!</span>');
     }
   }catch(e){}
 }, 1300);
@@ -17674,7 +17665,6 @@ const boot11=setInterval(function(){
     if(typeof S!=='undefined'&&S){
       clearInterval(boot11);
       setTimeout(autoPopup, 4000);
-      log('<span class="p">📢 확장팩 11탄 로드! 설정 탭에서 공지사항을 확인할 수 있습니다.</span>');
     }
   }catch(e){}
 }, 1400);
@@ -17752,7 +17742,6 @@ const bootTut=setInterval(function(){
       let introSeen=false, tutSeen=false;
       try{ introSeen=localStorage.getItem('rift-intro-seen')==='1'; tutSeen=localStorage.getItem('rift-tutorial-seen')==='1'; }catch(e){}
       if(introSeen && !tutSeen){ setTimeout(window.startTutorialIfNew, 1500); }
-      try{ if(typeof log==='function') log('<span class="p">📚 확장팩 12탄 로드! 튜토리얼이 추가되었습니다.</span>'); }catch(e){}
     }
   }catch(e){}
 }, 1400);
@@ -18625,7 +18614,6 @@ var boot = setInterval(function(){
   }, 700);
   setInterval(function(){ try{ storyTick(); }catch(e){} }, 2000);
   setInterval(function(){ try{ if(!hidden()){ paintSet(); var b = G('tab-ext'); if(b && b.classList.contains('on') && document.activeElement !== G('v2CrQ')) renderCraft2(); } }catch(e){} }, 1500);
-  log('<span class="p">🧰 확장팩 9탄 로드! 강화 수량 지정 · 끊기지 않는 오토 · 보스 패턴 · 스토리 · 제작소 · 🔍 찾기 · ☀️ 밝은 화면</span>');
 }, 500);
 
 window.RiftV2 = { openFinder:openFinder, setMode:setMode, toggleMode:toggleMode, craftGear:craftGear, patsFor:patsFor, upPlan:upPlan, _BG:BG };
@@ -21345,6 +21333,10 @@ document.addEventListener('click', function(ev){
   }catch(e){ console.error('스킬 클릭 오류', e); }
 });
 </script>
+<style>
+/* 메뉴 탭이 꺼져 전투 화면이 넓어져도, 화면 높이를 넘지 않게 크기 제한 (스킬 버튼까지 한 화면에 보이게) */
+#v3Scene{ width:min(100%, calc(46dvh * 352 / 198)); margin-left:auto; margin-right:auto; flex:none; }
+</style>
 </body>
 </html>
 
