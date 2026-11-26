@@ -21087,7 +21087,7 @@ function start(){
   Array.prototype.forEach.call(document.querySelectorAll('.tabs button[data-tab]'), function(b){ b.addEventListener('click', function(){ syncDrawer(b.getAttribute('data-tab'), true); }); });
   document.addEventListener('keydown', function(e){
     var tg = e.target && e.target.tagName; if(tg === 'INPUT' || tg === 'TEXTAREA' || tg === 'SELECT' || e.ctrlKey || e.metaKey || e.altKey) return;
-    if(e.key === 'Escape'){ var mb = $('modalBg'), fd = $('v2Finder'); if((mb && getComputedStyle(mb).display !== 'none') || (fd && fd.style.display && fd.style.display !== 'none')) return; closeDrawer(); return; }
+    if(e.key === 'Escape'){ return; }
     if(/^[0-9]$/.test(e.key)){ var i = e.key === '0' ? 9 : (+e.key - 1); if(MENU[i]){ e.stopImmediatePropagation(); e.preventDefault(); if(curTab === MENU[i].tab && $('v3App').classList.contains('drawer')) closeDrawer(); else openTab(MENU[i].tab); } }
   }, true);
   // 덮어쓰기: 스킬 버튼·전직 화면
@@ -21333,6 +21333,17 @@ try{ watch(); }catch(e){ console.error('번역기 시작 실패', e); }
 return { t:t, lang:lang, apply:applyAll, missing:missing, rows:function(){ return ROWS.length; } };
 })();
 
+</script>
+<script>
+/* 스킬 버튼 클릭 수정: v3 UI의 .v3Skill 버튼에는 onclick이 없어서 클릭을 직접 연결 */
+document.addEventListener('click', function(ev){
+  try{
+    var b = ev.target && ev.target.closest ? ev.target.closest('.v3Skill') : null;
+    if(!b) return;
+    var id = b.getAttribute('data-sk');
+    if(id && typeof useSkill === 'function') useSkill(id);
+  }catch(e){ console.error('스킬 클릭 오류', e); }
+});
 </script>
 </body>
 </html>
